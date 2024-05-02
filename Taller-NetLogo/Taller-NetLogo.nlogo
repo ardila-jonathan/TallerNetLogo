@@ -101,10 +101,10 @@ ticks
 30.0
 
 BUTTON
-82
-92
-145
-125
+5
+37
+68
+70
 NIL
 setup\n
 NIL
@@ -118,10 +118,10 @@ NIL
 1
 
 SLIDER
-61
-36
-233
-69
+882
+138
+1054
+171
 num-casas
 num-casas
 0
@@ -133,10 +133,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-44
-196
-107
-229
+82
+39
+145
+72
 NIL
 go\n
 T
@@ -150,21 +150,21 @@ NIL
 1
 
 SWITCH
-85
-285
-190
-318
+880
+172
+985
+205
 is-raining
 is-raining
-1
+0
 1
 -1000
 
 INPUTBOX
-25
-391
-180
-451
+881
+13
+1036
+73
 water-waste
 10.0
 1
@@ -172,12 +172,12 @@ water-waste
 Number
 
 INPUTBOX
-41
-482
-278
-542
+880
+75
+1039
+135
 water-gain
-10.0
+104.0
 1
 0
 Number
