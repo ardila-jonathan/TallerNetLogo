@@ -7,6 +7,7 @@ to setup
   reset-ticks
   crear-ambiente
   crear-casas
+  crear-embalse
 end
 
 to go
@@ -28,19 +29,25 @@ to controlar-lluvia
 end
 
 to aumentar-nivel-agua
-  ask turtles [
-    set nivel-agua nivel-agua + water-gain ;; Aumenta el nivel de agua
-    set label (word "Nivel de agua: " nivel-agua)
+  ask turtles with [color = blue] [
+    ; Increase water level
+    set nivel-agua nivel-agua + water-gain
+
+    ; Update the label dynamically
+    let label-text (word "Nivel de agua: " nivel-agua)
+    set label label-text
   ]
 end
 
 to disminuir-nivel-agua
-  ask turtles [
+  ask turtles with [color = blue][
+    ; Decrease water level
+    set nivel-agua nivel-agua - water-waste * num-casas
 
-      set nivel-agua nivel-agua - water-waste
-      set label (word "Nivel de agua: " nivel-agua)
-    ]
-
+    ; Update the label dynamically
+    let label-text (word "Nivel de agua: " nivel-agua)
+    set label label-text
+  ]
 end
 
 
@@ -48,12 +55,9 @@ to crear-casas
   create-turtles num-casas
   ask turtles[
     setxy random-xcor random-ycor ; Posición aleatoria
-    set color blue ; Puedes personalizar el color de las tortugas
+    set color brown ; Puedes personalizar el color de las tortugas
     set shape "house"
     set size 2
-    set nivel-agua random 100
-    set label (word "Nivel de agua: " nivel-agua)  ; Concatena el texto "Nivel de agua: " con el valor de nivel-agua
-    set label-color white ; Color del texto
   ]
 end
 
@@ -62,15 +66,37 @@ to crear-ambiente
   ask patches [
     set pcolor green ; Dibuja el suelo
   ]
+
 end
 
 to simulate-rain
-  ;; Simula la caída de la lluvia
   ask n-of 20 patches [
     if pcolor = green [
       set pcolor blue
     ]
   ]
+end
+
+to crear-embalse
+
+  create-turtles 1 [
+    set shape "square 2"
+    set size 6
+    set color blue
+    setxy 0 0
+    set nivel-agua random 100
+    set label (word "Nivel de agua: " nivel-agua)  ; Concatena el texto "Nivel de agua: " con el valor de nivel-agua
+    set label-color white ; Color del texto
+  ]
+end
+
+to ambiente-seco
+   ask n-of 20 patches [
+    if pcolor = green [
+      set pcolor orange
+    ]
+  ]
+
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -126,7 +152,7 @@ num-casas
 num-casas
 0
 20
-18.0
+20.0
 1
 1
 NIL
@@ -166,7 +192,7 @@ INPUTBOX
 1036
 73
 water-waste
-10.0
+100.0
 1
 0
 Number
@@ -177,7 +203,7 @@ INPUTBOX
 1039
 135
 water-gain
-104.0
+100.0
 1
 0
 Number
